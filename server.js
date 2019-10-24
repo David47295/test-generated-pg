@@ -4,8 +4,30 @@ const { Pool, Client } = require('pg');
 
 app.use(express.static(__dirname + '/build'));
 
-// Pools will look to your environment variables for credentials
-// Make sure you set them as outlined in https://node-postgres.com/features/connecting
-// const pool = new Pool();
+let connectionString;
+
+//the environmental variable
+if (process.env.connectionstring) {
+    console.log(process.env.connectionstring)
+    connectionString = process.env.connectionstring;
+}
+
+let client = new pg.Client(connectionString);
+
+client.connect(function(err) {
+    if (err) {
+        console.log(err);
+        process.exit(1);
+    } else {
+        client.query(
+            "SELECT NOW()",
+            function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+            }
+        );
+    }
+});
 
 module.exports.app = app;
