@@ -12,7 +12,7 @@ if (process.env.connectionstring) {
     connectionString = process.env.connectionstring;
 }
 
-let client = new pg.Client(connectionString);
+let client = new Client(connectionString);
 
 client.connect(function(err) {
     if (err) {
