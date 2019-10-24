@@ -1,1 +1,1 @@
-stack: appsody/react-nodejs-mongo:stack.stack
+stack: appsody/nodejs-express:0.2
